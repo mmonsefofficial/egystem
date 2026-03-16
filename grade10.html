@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 10 | STEM Guide</title>
+    <link rel="icon" href="head.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* --- Satisfying Click/Press Effect --- */
+        .subject-card:active {
+            transform: translateY(2px) scale(0.98); /* Pushes the card down slightly like a real button */
+            box-shadow: inset 0 4px 15px rgba(0, 0, 0, 0.05), 0 5px 15px rgba(30, 58, 138, 0.3) !important; /* Creates a deep shadow */
+            transition: all 0.1s ease; /* Makes the click feel instant and snappy */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+
+    <div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(31, 41, 55, 0.4); z-index: 999;" onclick="toggleChat()"></div>
+    <aside class="ai-side-panel" id="aiPanel">
+        <div class="chat-header">
+            <h3 style="margin:0;">✨ AI Tutor</h3>
+            <button class="close-btn" onclick="toggleChat()">×</button>
+        </div>
+        <div class="chat-box" id="chatHistory">
+            <div class="chat-msg msg-ai">Hello! Do you need help with your Grade 10 studies?</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Ask your question..." onkeypress="handleEnter(event)">
+            <button onclick="sendMessage()">➤</button>
+        </div>
+    </aside>
+
+    <div class="navbar-container" id="navContainer">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html"><img src="logo.png" alt="STEM Guide Logo" class="logo-img"></a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropbtn active">Grades ▾</a>
+                    <div class="dropdown-content">
+                        <a href="grade10.html">Grade 10</a>
+                        <a href="grade11.html">Grade 11</a>
+                        <a href="grade12.html">Grade 12</a>
+                    </div>
+                </li>
+                <li><a href="index.html#tips">Tips & Tricks</a></li>
+                <li><a href="index.html#about">About Us</a></li>
+            </ul>
+            <div class="ai-btn" onclick="toggleChat()">✨</div>
+        </nav>
+    </div>
+
+    <main class="section-container" style="padding-top: 5rem; padding-bottom: 2rem;">
+        <h1 class="reveal" style="font-size: 3.5rem; color: var(--brand-dark-blue); text-align: center; margin-bottom: 0;">Grade 10 Curriculum</h1>
+        <p class="reveal" style="text-align: center; color: var(--text-light); font-size: 1.2rem; margin-top: 10px;">Welcome to Freshman year. Select a subject below.</p>
+    </main>
+
+    <section class="section-container" style="padding-top: 0;">
+        <div class="materials-grid">
+            <a href="math.html" class="subject-card card-blue reveal" style="transition-delay: 0.1s;"><h3>📐 Maths</h3><p>Algebraic foundations, geometry, and early trigonometry.</p></a>
+            <a href="mechanics.html" class="subject-card card-orange reveal" style="transition-delay: 0.2s;"><h3>⚙️ Mechanics</h3><p>Introduction to Statics, Kinematics, and vectors.</p></a>
+            <a href="physics.html" class="subject-card card-purple reveal" style="transition-delay: 0.3s;"><h3>⚡ Physics</h3><p>Basic thermodynamics and Newton's laws of motion.</p></a>
+            <a href="chemistry.html" class="subject-card card-teal reveal" style="transition-delay: 0.1s;"><h3>🧪 Chemistry</h3><p>Periodic table trends, chemical bonds, and lab safety.</p></a>
+            <a href="biology.html" class="subject-card card-green reveal" style="transition-delay: 0.2s;"><h3>🧬 Biology</h3><p>Cellular biology, DNA structure, and basic life processes.</p></a>
+            <a href="geology.html" class="subject-card card-orange reveal" style="transition-delay: 0.3s;"><h3>🪨 Geology</h3><p>Earth sciences, rocks, and mineralogy fundamentals.</p></a>
+            
+            <a href="computer-science.html" class="subject-card card-blue reveal" style="transition-delay: 0.1s;"><h3>💻 Comp Science</h3><p>Programming algorithms, flowcharts, and basic coding.</p></a>
+            <a href="arabic.html" class="subject-card card-green reveal" style="transition-delay: 0.2s;"><h3>📚 Arabic</h3><p>Literature, grammar rules, and specialized reading texts.</p></a>
+            <a href="english.html" class="subject-card card-yellow reveal" style="transition-delay: 0.3s;"><h3>🗣️ English</h3><p>Scientific writing and presentation skills.</p></a>
+            <a href="second-language.html" class="subject-card card-purple reveal" style="transition-delay: 0.1s;"><h3>💬 Second Lang</h3><p>Grammar and conversational practice (French/German).</p></a>
+            <a href="social-studies.html" class="subject-card card-yellow reveal" style="transition-delay: 0.2s;"><h3>🌍 Social Studies</h3><p>History, geography, and global impacts.</p></a>
+            <a href="religion.html" class="subject-card card-green reveal" style="transition-delay: 0.3s;"><h3>📖 Religion</h3><p>Required curriculum studies and ethics.</p></a>
+            
+            <a href="capstone.html" class="subject-card reveal" style="grid-column: 1 / -1; background: var(--ai-gradient); border: none; color: white; transition-delay: 0.2s;">
+                <h3 style="color: white;">🚀 Grade 10 Capstone Guide</h3>
+                <p style="color: rgba(255,255,255,0.9);">Learn the EDP (Engineering Design Process), how to maintain your Capstone journal, and tackle your very first challenge.</p>
+            </a>
+        </div>
+    </section>
+    <footer class="site-footer">
+        <div class="section-container" style="padding: 0;">
+            <p>&copy; 2026 <span style="color: var(--brand-white); font-weight: 600;">STEM Guide</span>. All rights reserved.</p>
+            <p>Designed and built by Game Changers Team(R3S).</p>
+        </div>
+    </footer>
+
+    <script>
+        const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('active'); observer.unobserve(entry.target); } });
+        }, observerOptions);
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) document.getElementById('navContainer').classList.add('scrolled');
+            else document.getElementById('navContainer').classList.remove('scrolled');
+        });
+
+        function toggleChat() {
+            const panel = document.getElementById('aiPanel');
+            const overlay = document.getElementById('overlay');
+            if (panel.classList.contains('active')) {
+                panel.classList.remove('active'); overlay.style.display = 'none';
+            } else {
+                panel.classList.add('active'); overlay.style.display = 'block'; setTimeout(() => document.getElementById('userInput').focus(), 500);
+            }
+        }
+        function sendMessage() {
+            const input = document.getElementById('userInput'); const chatHistory = document.getElementById('chatHistory'); const msg = input.value.trim();
+            if (msg === '') return;
+            chatHistory.innerHTML += `<div class="chat-msg msg-user">${msg}</div>`; input.value = ''; chatHistory.scrollTop = chatHistory.scrollHeight;
+            setTimeout(() => {
+                chatHistory.innerHTML += `<div class="chat-msg msg-ai">This is a great specific question for a Grade 10 student! I am retrieving the curriculum details now...</div>`;
+                chatHistory.scrollTop = chatHistory.scrollHeight;
+            }, 800);
+        }
+        function handleEnter(e) { if (e.key === 'Enter') sendMessage(); }
+    </script>
+</body>
+</html>

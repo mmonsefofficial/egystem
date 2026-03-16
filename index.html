@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STEM Guide | Egypt</title>
+    <link rel="icon" href="head.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* --- Subject Card "Click Here" Button --- */
+        .card-btn {
+            display: inline-block;
+            margin-top: 1.2rem;
+            padding: 0.6rem 1.5rem;
+            background-color: var(--brand-teal);
+            color: #ffffff;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 10px rgba(8, 145, 178, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .subject-card:hover .card-btn {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(8, 145, 178, 0.4);
+        }
+    </style>
+</head>
+
+<body class="no-copy">
+
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+    <div class="bg-blob blob-3"></div>
+
+    <div class="vector-bg-container">
+        <div class="vector-shape shape-atom"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="4"><ellipse cx="50" cy="50" rx="40" ry="14" transform="rotate(30 50 50)"/><ellipse cx="50" cy="50" rx="40" ry="14" transform="rotate(-30 50 50)"/><ellipse cx="50" cy="50" rx="40" ry="14" transform="rotate(90 50 50)"/><circle cx="50" cy="50" r="8" fill="currentColor"/></svg></div>
+        <div class="vector-shape shape-circuit"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"><path d="M10 50 h30 l20 -30 h30"/><circle cx="90" cy="20" r="5" fill="currentColor"/><path d="M40 50 l20 30 h30"/><circle cx="90" cy="80" r="5" fill="currentColor"/><circle cx="10" cy="50" r="5" fill="currentColor"/></svg></div>
+        <div class="vector-shape shape-flask"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linejoin="round"><path d="M40 15 h20 v20 l25 45 a10 10 0 0 1 -8 15 h-54 a10 10 0 0 1 -8 -15 l25 -45 v-20"/><path d="M25 65 h50"/></svg></div>
+        <div class="vector-shape shape-gear"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="8"><circle cx="50" cy="50" r="22"/><path d="M50 10 v10 m0 60 v10 m40 -40 h-10 m-60 0 h-10 m58 -28 l-7 7 m-42 42 l-7 7 m58 0 l-7 -7 m-42 -42 l-7 -7" stroke-linecap="round"/></svg></div>
+        <div class="vector-shape shape-brain"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"><path d="M50 90 c-25 0 -45 -15 -40 -40 c0 -15 10 -25 20 -30 c10 -5 20 -5 20 10 c0 -15 10 -15 20 -10 c10 5 20 15 20 30 c5 25 -15 40 -40 40 z"/><path d="M50 25 v65"/><path d="M30 45 c10 5 10 15 20 15"/><path d="M70 45 c-10 5 -10 15 -20 15"/></svg></div>
+        <div class="vector-shape shape-geometric"><svg viewBox="0 0 100 100" fill="currentColor"><path d="M10 50 a40 40 0 0 1 80 0 h-80"/></svg></div>
+    </div>
+
+    <div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(31, 41, 55, 0.4); backdrop-filter: blur(4px); z-index: 999; transition: opacity 0.3s;" onclick="toggleChat()"></div>
+
+    <aside class="ai-side-panel" id="aiPanel">
+        <div class="chat-header">
+            <h3>✨ AI Tutor</h3>
+            <button class="close-btn" onclick="toggleChat()">×</button>
+        </div>
+        <div class="chat-box" id="chatHistory">
+            <div class="chat-msg msg-ai">Hello! Ready to dive into your STEM studies? Let me know if you need help with your Capstone, Chemistry, or any other subject.</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Ask your question..." onkeypress="handleEnter(event)">
+            <button onclick="sendMessage()">➤</button>
+        </div>
+    </aside>
+
+    <div class="navbar-container" id="navContainer">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="#introduction"><img src="logo.png" alt="STEM Guide Logo" class="logo-img"></a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#introduction" class="active">Home</a></li>
+                <li><a href="#materials">Materials</a></li>
+                <li><a href="#tips">Tips & Tricks</a></li>
+                <li><a href="#about">About Us</a></li>
+            </ul>
+            <div class="ai-btn" onclick="toggleChat()" title="Open AI Tutor">✨</div>
+        </nav>
+    </div>
+
+    <main class="hero" id="introduction">
+        <div class="hero-text reveal">
+            <h1>Find Your Next<br><span class="text-gradient-animate">Big Skill Faster</span></h1>
+            <p>Our Courses Will Accurately Match You To Professions That You'll Love And Succeed In! Your ultimate guide to navigating STEM High Schools in Egypt.</p>
+            <a href="#materials" class="btn-primary">Get Started</a>
+        </div>
+        <div class="hero-image reveal" style="transition-delay: 0.2s;">
+            <video class="dynamic-element" autoplay loop muted playsinline preload="metadata">
+                <source src="brain_animation.mp4" type="video/mp4">
+            </video>
+        </div>
+    </main>
+
+    <section class="section-container">
+        <div class="info-card reveal">
+            <h3 style="color: var(--brand-dark-blue); font-size: 1.5rem;">The Egyptian STEM System</h3>
+            <p>STEM (Science, Technology, Engineering, and Mathematics) high schools in Egypt are designed for top-performing middle school graduates. The curriculum is uniquely project-based, emphasizing critical thinking, scientific research, and real-world problem-solving rather than rote memorization.</p>
+            
+            <h3 style="color: var(--brand-dark-blue); font-size: 1.5rem; margin-top: 1.5rem;">Admission Constraints</h3>
+            <ul style="color: var(--text-light);">
+                <li>Achieve a near-perfect score (usually 98%+) in the preparatory certificate.</li>
+                <li>Obtain full marks in at least one or two of the core subjects: English, Science, or Math.</li>
+                <li>Pass the rigorous multi-disciplinary STEM admission test (IQ, Math, Science, and English).</li>
+            </ul>
+
+            <div class="schools-container">
+                <h3 style="color: var(--brand-dark-blue); font-size: 1.8rem; margin-bottom: 0.5rem;">STEM schools Network</h3>
+                <div style="max-width: 650px; margin: 0 auto 3rem auto;">
+                    <p style="font-size: 0.95rem; color: var(--text-light); line-height: 1.6;">
+                        Explore our network of <strong style="color: var(--brand-orange); font-weight: 700;">21 STEM schools</strong> spanning across Egypt. Click any crest below to visit its official Facebook page, or use the list to find their locations on Google Maps.
+                    </p>
+                </div>
+                
+                <div class="marquee-wrapper">
+                    <div class="marquee-track">
+                        <div class="school-logo-item"><a href="https://www.facebook.com/share/1K6kAJueMm/?mibextid=wwXIfr" target="_blank"><img src="maadi-logo.png" alt="Maadi STEM"></a><span>Maadi (Girls)</span></div>
+                        <div class="school-logo-item"><a href="https://www.facebook.com/share/18KjJSCtJF/?mibextid=wwXIfr" target="_blank"><img src="October-logo.png" alt="6th of October STEM"></a><span>6th of October</span></div>
+                        <div class="school-logo-item"><a href="https://www.facebook.com/STEM.Redsea" target="_blank"><img src="RedSea-logo.png" alt="Red Sea STEM"></a><span>Red Sea</span></div>
+                        <div class="school-logo-item"><a href="https://www.facebook.com/profile.php?id=100068686028786&mibextid=wwXIfr&mibextid=wwXIfr" target="_blank"><img src="Alex-logo.png" alt="Alexandria STEM"></a><span>Alexandria</span></div>
+                        <div class="school-logo-item"><a href="https://www.facebook.com/share/1CcadPKEiY/?mibextid=wwXIfr" target="_blank"><img src="Gharbia-logo.png" alt="Gharbia STEM"></a><span>Gharbia</span></div>
+                        <div class="school-logo-item"><a href="https://www.facebook.com/share/1CYVfrFAYj/?mibextid=wwXIfr" target="_blank"><img src="Assuit-logo.png" alt="Assiut STEM"></a><span>Assiut</span></div>
+                        
+                        <div class="school-logo-item"><a href="https://www.facebook.com/share/1K6kAJueMm/?mibextid=wwXIfr" target="_blank"><img src="maadi-logo.png" alt="Maadi STEM"></a><span>Maadi (Girls)</span></div>
+                        <div class="school-logo-item"><a href="https://www.facebook.com/share/18KjJSCtJF/?mibextid=wwXIfr" target="_blank"><img src="October-logo.png" alt="6th of October STEM"></a><span>6th of October</span></div>
+                        <div class="school-logo-item"><a href="https://www.facebook.com/STEM.Redsea" target="_blank"><img src="RedSea-logo.png" alt="Red Sea STEM"></a><span>Red Sea</span></div>
+                        <div class="school-logo-item"><a href="https://www.facebook.com/profile.php?id=100068686028786&mibextid=wwXIfr&mibextid=wwXIfr" target="_blank"><img src="Alex-logo.png" alt="Alexandria STEM"></a><span>Alexandria</span></div>
+                        <div class="school-logo-item"><a href="https://www.facebook.com/share/1CcadPKEiY/?mibextid=wwXIfr" target="_blank"><img src="Gharbia-logo.png" alt="Gharbia STEM"></a><span>Gharbia</span></div>
+                        <div class="school-logo-item"><a href="https://www.facebook.com/share/1CYVfrFAYj/?mibextid=wwXIfr" target="_blank"><img src="Assuit-logo.png" alt="Assiut STEM"></a><span>Assiut</span></div>
+                    </div>
+                </div>
+
+                <div class="more-schools-trigger" onclick="toggleMoreSchools()">
+                    <span class="view-all-text">View All Schools ↓</span>
+                </div>
+
+                <div id="moreSchoolsList" class="more-schools-list">
+                    <ul class="school-text-links">
+                        <li><a href="https://maps.app.goo.gl/ZjnQkHWjFFXRUihs6" target="_blank">📍 New Cairo</a></li>
+                        <li><a href="https://www.google.com/maps/search/Obour+STEM+School" target="_blank">📍 Obour</a></li>
+                        <li><a href="https://www.google.com/maps/search/Kafr+El+Sheikh+STEM+School" target="_blank">📍 Kafr El Sheikh</a></li>
+                        <li><a href="https://www.google.com/maps/search/Ismailia+STEM+School" target="_blank">📍 Ismailia</a></li>
+                        <li><a href="https://maps.app.goo.gl/AEzcyohWZB96Q3V87" target="_blank">📍 North Sinai (El Arish)</a></li>
+                        <li><a href="https://www.google.com/maps/search/Sharkia+STEM+School+Zagazig" target="_blank">📍 Sharkia (Zagazig)</a></li>
+                        <li><a href="https://www.google.com/maps/search/Sadat+City+STEM+School" target="_blank">📍 Menoufia (Sadat City)</a></li>
+                        <li><a href="https://www.google.com/maps/search/Sirs+El+Layan+STEM+School" target="_blank">📍 Menoufia (Sirs El-Layan)</a></li>
+                        <li><a href="https://www.google.com/maps/search/Fayoum+STEM+School" target="_blank">📍 Fayoum</a></li>
+                        <li><a href="https://www.google.com/maps/search/Beni+Suef+STEM+School" target="_blank">📍 Beni Suef</a></li>
+                        <li><a href="https://www.google.com/maps/search/Minya+STEM+School" target="_blank">📍 Minya</a></li>
+                        <li><a href="https://www.google.com/maps/search/Sohag+STEM+School" target="_blank">📍 Sohag (Girls)</a></li>
+                        <li><a href="https://www.google.com/maps/search/Qena+STEM+School" target="_blank">📍 Qena</a></li>
+                        <li><a href="https://www.google.com/maps/search/Luxor+STEM+School+Tiba" target="_blank">📍 Luxor (Tiba)</a></li>
+                        <li><a href="https://maps.app.goo.gl/CdTqBxJswiYLFh2J8?g_st=aw" target="_blank">📍 Behera</a></li>
+                        <li><a href="https://maps.app.goo.gl/jcFoYn1temBhTwyp6" target="_blank">📍 Dakahlia</a></li>
+                        <li><a href="https://maps.app.goo.gl/qzq2or4CHfqaze359" target="_blank">📍 Oct 11th District</a></li>
+                        <li><a href="https://maps.app.goo.gl/3aSz2w2KED3YMHZd9" target="_blank">📍 Red Sea</a></li>
+                        <li><a href="https://maps.app.goo.gl/iqvU2d44RYbp7fj77" target="_blank">📍 Alexandria</a></li>
+                        <li><a href="https://maps.app.goo.gl/v1im6E215j6SXhex7" target="_blank">📍 Gharbia</a></li>
+                        <li><a href="https://maps.app.goo.gl/KKYkTGeiqxCEjQd76" target="_blank">📍 Assiut</a></li>
+                        <li><a href="https://maps.app.goo.gl/pxMz14CeWiSkiExM9" target="_blank">📍 Maadi</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="materials" class="section-container" style="padding-top: 2rem;">
+        <h2 class="section-title reveal">Study Materials</h2>
+        <p class="section-subtitle reveal">Select your current grade to view your specific curriculum and resources.</p>
+        
+        <div class="materials-grid">
+            <a href="grade10.html" class="subject-card card-blue reveal" style="transition-delay: 0.1s; text-align: center; padding: 3rem 2rem;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;"></div>
+                <h3 style="justify-content: center; font-size: 1.8rem;">Grade 10</h3>
+                <p>Freshman Year: Foundational STEM subjects and Capstone basics.</p>
+                <span class="card-btn">Click Here</span>
+            </a>
+            
+            <a href="grade11.html" class="subject-card card-orange reveal" style="transition-delay: 0.2s; text-align: center; padding: 3rem 2rem;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;"></div>
+                <h3 style="justify-content: center; font-size: 1.8rem;">Grade 11</h3>
+                <p>Junior Year: Advanced concepts and complex university requirements.</p>
+                <span class="card-btn">Click Here</span>
+            </a>
+            
+            <a href="grade12.html" class="subject-card card-purple reveal" style="transition-delay: 0.3s; text-align: center; padding: 3rem 2rem;">
+                <div style="font-size: 3rem; margin-bottom: 1rem;">🎓</div>
+                <h3 style="justify-content: center; font-size: 1.8rem;">Grade 12</h3>
+                <p>Senior Year: Final projects, UR mastery, and university prep.</p>
+                <span class="card-btn">Click Here</span>
+            </a>
+        </div>
+    </section>
+
+    <section id="tips" class="section-container">
+        <h2 class="section-title reveal">Tips & Tricks</h2>
+        <p class="section-subtitle reveal">Priceless advice from accomplished alumni.</p>
+        <div class="materials-grid">
+            <div class="info-card reveal" style="border-left-color: var(--brand-teal); transition-delay: 0.1s;">
+                <p><em>"Don't leave your Capstone journal until the last week. Documenting your process is just as important as the final prototype. Start your research early!"</em></p>
+                <strong style="color: var(--brand-dark-blue);">- Class of 2023 Senior</strong>
+            </div>
+            <div class="info-card reveal" style="border-left-color: var(--brand-purple); transition-delay: 0.3s;">
+                <p><em>"Time management is your best friend. Balance your UR (University Requirements) studying with your project deadlines by utilizing the Pomodoro technique."</em></p>
+                <strong style="color: var(--brand-dark-blue);">- Class of 2024 Senior</strong>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section-container" style="padding-bottom: 8rem;">
+        <h2 class="section-title reveal">About Us</h2>
+        <p class="section-subtitle reveal">The Game Changers Team (R3S)</p>
+        
+        <div class="info-card reveal" style="text-align: center; max-width: 900px; margin: 0 auto; border-left: none; border-top: 5px solid var(--brand-orange); padding: 3rem 2.5rem;">
+            <p style="color: var(--text-light); font-size: 1.05rem; line-height: 1.8; margin: 0; text-align: justify;">
+                We built Stemguide to help our peers navigate the STEM curriculum in Egypt by consolidating top-tier materials and AI assistance. This platform is a collaborative effort by our <em>Lead:</em> <span style="font-weight: 600;"><a href="https://mmonsefofficial.github.io/portofolio/" target="_blank" style="color: inherit; text-decoration: none;">Mohamed Monsef</a></span>, <em>AI:</em> <span style="font-weight: 600;">Anas Mohamed</span>, <em>Design:</em> <span style="font-weight: 600;">Mariam Fady</span> and <span style="font-weight: 600;">Rodina Ahmed</span>, <em>Materials:</em> <span style="font-weight: 600;">Ebram Sameh</span> and <span style="font-weight: 600;">Adam Hussein</span>, <em>Strategy:</em> <span style="font-weight: 600;">Roaa Alaa</span>, and <em>QA:</em> <span style="font-weight: 600;">Habiba Ahmed</span>.
+            </p>
+        </div>
+    </section>
+
+    <footer style="background-color: #1e3a8a; color: #ffffff; padding: 60px 20px 30px; font-family: 'Poppins', sans-serif;">
+        <div style="max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px;">
+            
+            <div style="flex: 1; min-width: 250px;">
+                <h3 style="color: #ffffff; margin: 0 0 20px 0; font-size: 1.8rem; font-weight: 700;">Stemguide</h3>
+                <p style="color: rgba(255,255,255,0.7); font-size: 0.95rem; line-height: 1.6; margin: 0;">
+                    Empowering Egyptian STEM students with the tools and resources to lead the future.
+                </p>
+            </div>
+
+            <div style="flex: 1; min-width: 200px;">
+                <h4 style="color: #f97316; margin: 0 0 20px 0; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; font-weight: 700;">Navigation</h4>
+                <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.95rem;">
+                    <li style="margin-bottom: 12px;"><a href="#introduction" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: 0.3s;">Home</a></li>
+                    <li style="margin-bottom: 12px;"><a href="#about" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: 0.3s;">About Team</a></li>
+                    <li style="margin-bottom: 12px;"><a href="https://mmonsefofficial.github.io/portofolio/" target="_blank" style="color: rgba(255,255,255,0.8); text-decoration: none; transition: 0.3s;">Lead Dev Portfolio</a></li>
+                </ul>
+            </div>
+
+            <div style="flex: 1; min-width: 250px;">
+                <h4 style="color: #f97316; margin: 0 0 20px 0; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; font-weight: 700;">Contact Us</h4>
+                <p style="color: rgba(255,255,255,0.8); font-size: 0.95rem; margin-bottom: 20px;">
+                    Email: <a href="mailto:contact@stemguide.com" style="color: #ffffff; text-decoration: none; font-weight: 500;">contact@stemguide.com</a>
+                </p>
+                
+                <div style="display: flex; gap: 15px;">
+                    <a href="#" aria-label="Facebook" style="background: rgba(255,255,255,0.1); width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: 0.3s; fill: #ffffff; text-decoration: none;">
+                        <svg width="20" height="20" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-2.221c0-.822.112-1.117.821-1.117h3.179v-4.403l-4.403-.001c-4.403 0-6.604 2.131-6.604 5.922v1.82z"/></svg>
+                    </a>
+                    <a href="#" aria-label="Instagram" style="background: rgba(255,255,255,0.1); width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: 0.3s; fill: #ffffff; text-decoration: none;">
+                        <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    </a>
+                    <a href="#" aria-label="LinkedIn" style="background: rgba(255,255,255,0.1); width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: 0.3s; fill: #ffffff; text-decoration: none;">
+                        <svg width="18" height="18" viewBox="0 0 24 24"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"/></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div style="border-top: 1px solid rgba(255,255,255,0.1); margin-top: 50px; padding-top: 25px; text-align: center; font-size: 0.85rem; color: rgba(255,255,255,0.5);">
+            <p style="margin: 0 0 5px 0;">© 2026 <strong style="color: #ffffff;">STEM Guide</strong>. All rights reserved.</p>
+            <p style="margin: 0;">Designed and built for Egyptian STEM students by <strong style="color: #ffffff;">Game Changers Team (R3S)</strong>.</p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script>
+        // Disable Right-Click on this page
+        document.addEventListener('contextmenu', event => event.preventDefault());
+    </script>
+</body>
+</html>

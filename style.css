@@ -1,0 +1,459 @@
+:root {
+    /* --- Brand Identity Colors --- */
+    --brand-dark-blue: #1E3A8A;
+    --brand-orange: #FF6B35;
+    --brand-teal: #0891B2;
+    --brand-purple: #7E22CE;
+    --brand-green: #10B981;
+    --brand-yellow: #F59E0B;
+    --brand-white: #FFFFFF;
+    --brand-off-white: #F8FAFC;
+    --brand-dark: #1F2937;
+    
+    --text-light: #4B5563;
+    --bg-gradient: linear-gradient(135deg, #F8FAFC 0%, #eef2ff 50%, #fff7ed 100%);
+    --ai-gradient: linear-gradient(135deg, #7E22CE, #0891B2);
+    --card-bg: rgba(255, 255, 255, 0.85);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: var(--bg-gradient);
+    color: var(--brand-dark);
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* --- 1. Soft Background Blobs --- */
+.bg-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    z-index: -2;
+    opacity: 0.3;
+    animation: float-blob 15s infinite alternate ease-in-out;
+    transform: translateZ(0);
+    will-change: transform;
+}
+.blob-1 { top: -5%; left: -10%; width: 500px; height: 500px; background: var(--brand-orange); }
+.blob-2 { top: 40%; right: -5%; width: 400px; height: 400px; background: var(--brand-teal); animation-delay: -5s; }
+.blob-3 { bottom: 10%; left: 20%; width: 600px; height: 600px; background: var(--brand-purple); animation-duration: 20s; }
+
+@keyframes float-blob {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(80px, 120px) scale(1.1); }
+}
+
+/* --- 2. Moving Vector Shapes from Visual Identity --- */
+.vector-bg-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* Prevents shapes from blocking clicks */
+    z-index: -1;
+    overflow: hidden;
+}
+
+.vector-shape {
+    position: absolute;
+    opacity: 0.08; /* Super subtle so it doesn't clash with text */
+    animation: floatShape 25s infinite ease-in-out;
+}
+
+.vector-shape svg { width: 100%; height: auto; }
+
+/* Positioning and styling the specific icons */
+.shape-atom { top: 15%; left: 8%; width: 120px; color: var(--brand-dark-blue); animation-duration: 28s; }
+.shape-circuit { top: 60%; left: 4%; width: 150px; color: var(--brand-orange); animation-duration: 35s; animation-direction: reverse; }
+.shape-brain { top: 75%; right: 8%; width: 100px; color: var(--brand-purple); animation-duration: 22s; }
+.shape-flask { top: 20%; right: 5%; width: 90px; color: var(--brand-teal); animation-duration: 30s; }
+.shape-gear { top: 45%; right: 15%; width: 110px; color: var(--brand-green); animation-duration: 40s; animation-direction: reverse; }
+.shape-geometric { top: 40%; left: 20%; width: 180px; color: var(--brand-yellow); animation-duration: 32s; }
+
+@keyframes floatShape {
+    0% { transform: translateY(0) rotate(0deg) scale(1); }
+    33% { transform: translateY(-40px) rotate(15deg) scale(1.05); }
+    66% { transform: translateY(20px) rotate(-10deg) scale(0.95); }
+    100% { transform: translateY(0) rotate(0deg) scale(1); }
+}
+
+/* --- Floating Navigation Bar --- */
+.navbar-container { padding: 1.5rem 4rem; display: flex; justify-content: center; position: sticky; top: 0; z-index: 100; transition: padding 0.3s ease; }
+.navbar-container.scrolled { padding: 1rem 4rem; }
+.navbar { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(15px); border-radius: 50px; padding: 0.8rem 2rem; display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 1200px; box-shadow: 0 10px 30px rgba(30, 58, 138, 0.08); }
+
+.logo { display: flex; align-items: center; }
+.logo-img { max-height: 45px; width: auto; object-fit: contain; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.logo-img:hover { transform: scale(1.1) rotate(-3deg); }
+
+.nav-links { display: flex; list-style: none; gap: 3rem; margin: 0; padding: 0; }
+.nav-links a { text-decoration: none; color: var(--text-light); font-weight: 600; font-size: 0.95rem; transition: color 0.3s; position: relative; }
+.nav-links a:hover, .nav-links a.active { color: var(--brand-dark-blue); }
+.nav-links a::after { content: ''; position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%) scaleX(0); width: 24px; height: 3px; background-color: var(--brand-orange); border-radius: 2px; transition: transform 0.3s ease; }
+.nav-links a:hover::after, .nav-links a.active::after { transform: translateX(-50%) scaleX(1); }
+
+/* --- Dropdown Menu Styles --- */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--brand-white);
+    min-width: 150px;
+    box-shadow: 0 15px 35px rgba(30, 58, 138, 0.1);
+    border-radius: 15px;
+    z-index: 200;
+    top: 150%; 
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+    padding: 0.5rem 0;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.dropdown::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 20px;
+}
+
+.dropdown-content a {
+    color: var(--text-light);
+    padding: 12px 20px;
+    text-decoration: none;
+    display: block;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.dropdown-content a::after {
+    display: none;
+}
+
+.dropdown-content a:hover {
+    background-color: var(--brand-off-white);
+    color: var(--brand-orange);
+    padding-left: 25px; 
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+    animation: dropFade 0.3s ease;
+}
+
+@keyframes dropFade {
+    from { opacity: 0; transform: translate(-50%, -10px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* Pulsing AI Button */
+.ai-btn { width: 45px; height: 45px; border-radius: 50%; background: var(--ai-gradient); display: flex; justify-content: center; align-items: center; color: white; font-size: 1.3rem; cursor: pointer; box-shadow: 0 4px 15px rgba(126, 34, 206, 0.4); animation: ai-pulse 2s infinite; transition: transform 0.2s ease; }
+.ai-btn:hover { transform: scale(1.15); animation: none; box-shadow: 0 8px 25px rgba(126, 34, 206, 0.6); }
+@keyframes ai-pulse { 0% { box-shadow: 0 0 0 0 rgba(126, 34, 206, 0.6); } 70% { box-shadow: 0 0 0 15px rgba(126, 34, 206, 0); } 100% { box-shadow: 0 0 0 0 rgba(126, 34, 206, 0); } }
+
+/* --- AI Chat Slide-out Panel --- */
+.ai-side-panel { position: fixed; top: 0; right: -420px; width: 100%; max-width: 400px; height: 100vh; background: var(--brand-white); box-shadow: -10px 0 40px rgba(0,0,0,0.15); transition: right 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); z-index: 1000; display: flex; flex-direction: column; }
+.ai-side-panel.active { right: 0; }
+.chat-header { padding: 1.5rem; background: var(--ai-gradient); color: white; display: flex; justify-content: space-between; align-items: center; }
+.chat-header h3 { margin: 0; font-size: 1.2rem; font-weight: 600; }
+.close-btn { background: none; border: none; color: white; font-size: 1.8rem; cursor: pointer; transition: transform 0.3s; }
+.close-btn:hover { transform: scale(1.2) rotate(90deg); }
+.chat-box { flex: 1; padding: 1.5rem; overflow-y: auto; background: var(--brand-off-white); display: flex; flex-direction: column; gap: 1rem; scroll-behavior: smooth; }
+.chat-msg { max-width: 80%; padding: 1rem; border-radius: 15px; font-size: 0.95rem; line-height: 1.5; animation: pop-in 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+.msg-ai { background: var(--brand-white); border: 1px solid #e5e7eb; align-self: flex-start; border-bottom-left-radius: 2px; color: var(--brand-dark); }
+.msg-user { background: var(--brand-teal); color: white; align-self: flex-end; border-bottom-right-radius: 2px; }
+@keyframes pop-in { 0% { opacity: 0; transform: scale(0.8); } 100% { opacity: 1; transform: scale(1); } }
+.chat-input { padding: 1.5rem; background: var(--brand-white); border-top: 1px solid #e5e7eb; display: flex; gap: 10px; }
+.chat-input input { flex: 1; padding: 0.8rem 1.2rem; border: 1px solid #d1d5db; border-radius: 25px; outline: none; font-family: 'Poppins', sans-serif; color: var(--brand-dark); transition: border-color 0.3s; }
+.chat-input input:focus { border-color: var(--brand-teal); }
+.chat-input button { background: var(--brand-teal); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; transition: transform 0.2s, background 0.2s; }
+.chat-input button:hover { transform: scale(1.1); background: var(--brand-dark-blue); }
+
+/* --- Hero Section --- */
+.hero { display: flex; align-items: center; justify-content: space-between; max-width: 1200px; margin: 2rem auto; padding: 0 4rem; min-height: 70vh; position: relative; z-index: 10; }
+.hero-text h1 { font-size: 4.5rem; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -1.5px; color: var(--brand-dark); }
+.text-gradient-animate { background: linear-gradient(270deg, var(--brand-dark-blue), var(--brand-teal), var(--brand-purple), var(--brand-orange)); background-size: 300% 300%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: flowGradient 6s ease infinite; }
+@keyframes flowGradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.hero-text p { font-size: 1.1rem; color: var(--text-light); line-height: 1.6; margin-bottom: 2.5rem; max-width: 90%; }
+
+.btn-primary { display: inline-block; background: var(--brand-teal); color: white; padding: 1.1rem 2.8rem; border-radius: 30px; text-decoration: none; font-weight: 600; font-size: 1.1rem; transition: all 0.3s ease; box-shadow: 0 10px 20px rgba(8, 145, 178, 0.3); border: none; cursor: pointer; }
+.btn-primary:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(8, 145, 178, 0.5); background: var(--brand-dark-blue); }
+
+.hero-image { flex: 1; display: flex; justify-content: center; position: relative; }
+/* Final Video Style */
+.dynamic-element {
+    width: 100%;
+    max-width: 800px;  /* Large size */
+    height: auto;      /* Maintains correct aspect ratio */
+    
+    border-radius: 30px; /* Smooth rounded corners */
+    box-shadow: 0 20px 50px rgba(30, 58, 138, 0.2); /* Deep shadow for depth */
+    
+    /* Animation */
+    animation: float 6s ease-in-out infinite;
+    transition: transform 0.1s ease-out;
+    
+    /* Blending (Optional: Remove this line if video looks dark) */
+    mix-blend-mode: multiply; 
+}
+@keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-25px); } }
+
+/* --- Scroll Reveal Classes --- */
+.reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.5, 0, 0, 1); }
+.reveal.active { opacity: 1; transform: translateY(0); }
+
+/* --- Content Sections --- */
+.section-container { max-width: 1200px; margin: 0 auto; padding: 5rem 4rem; position: relative; z-index: 10; }
+.section-title { font-size: 2.8rem; margin-bottom: 1rem; color: var(--brand-dark-blue); text-align: center; letter-spacing: -1px; }
+.section-subtitle { text-align: center; color: var(--text-light); margin-bottom: 4rem; font-size: 1.1rem; }
+
+.materials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.8rem; position: relative; z-index: 50; pointer-events: auto; }
+
+.subject-card { background: var(--card-bg); backdrop-filter: blur(10px); padding: 2rem 1.8rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.8); box-shadow: 0 10px 30px rgba(30, 58, 138, 0.04); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; border-top: 4px solid var(--brand-teal); position: relative; overflow: hidden; text-decoration: none; display: block; z-index: 50; }
+
+/* --- BUG FIX: Stop Card Hover Flickering & Lag --- */
+.subject-card {
+    /* Forces the device's graphics card to render the animation smoothly */
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+.subject-card * {
+    /* Tells the browser to ignore the text and button for mouse interactions, so they don't interrupt the card's hover state */
+    pointer-events: none;
+}
+.subject-card::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transition: left 0.5s ease; z-index: 1; pointer-events: none; }
+.subject-card:hover::before { left: 100%; }
+.subject-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 20px 40px rgba(30, 58, 138, 0.1); z-index: 60; }
+
+.card-blue { border-top-color: var(--brand-dark-blue); }
+.card-orange { border-top-color: var(--brand-orange); }
+.card-purple { border-top-color: var(--brand-purple); }
+.card-green { border-top-color: var(--brand-green); }
+.card-yellow { border-top-color: var(--brand-yellow); }
+
+.subject-card h3 { margin-top: 0; color: var(--brand-dark); font-size: 1.3rem; display: flex; align-items: center; gap: 10px; position: relative; z-index: 2; }
+.subject-card p { font-size: 0.95rem; color: var(--text-light); line-height: 1.5; position: relative; z-index: 2; }
+
+.info-card { background: var(--brand-white); padding: 3rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(30, 58, 138, 0.05); margin-bottom: 2rem; line-height: 1.8; border-left: 5px solid var(--brand-orange); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.info-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(30, 58, 138, 0.1); }
+
+/* --- Footer --- */
+.site-footer { background-color: var(--brand-dark-blue); color: rgba(255, 255, 255, 0.8); text-align: center; padding: 4rem 1rem; font-size: 0.95rem; border-top: 5px solid var(--brand-orange); position: relative; overflow: hidden; z-index: 10; }
+.site-footer p { margin: 0.5rem 0; position: relative; z-index: 2; }
+.footer-highlight { color: var(--brand-white); font-weight: 600; }
+
+/* =========================================
+   📱 MOBILE RESPONSIVE DESIGN (Media Queries)
+   ========================================= */
+@media screen and (max-width: 768px) {
+    /* 1. Fix the Navigation Bar */
+    .navbar-container { padding: 1rem; }
+    .navbar { 
+        flex-direction: column; /* Stacks logo, links, and AI button */
+        gap: 1rem; 
+        padding: 1rem; 
+        border-radius: 20px; 
+    }
+    .nav-links { 
+        gap: 1.5rem; 
+        flex-wrap: wrap; /* Allows links to flow to the next line if needed */
+        justify-content: center; 
+    }
+
+    /* 2. Fix the Hero Section (Text and Video) */
+    .hero { 
+        flex-direction: column; /* Puts the video UNDER the text */
+        padding: 0 1.5rem; 
+        text-align: center; /* Centers everything for mobile */
+        margin-top: 1rem;
+        min-height: auto;
+    }
+    .hero-text h1 { 
+        font-size: 2.8rem; /* Shrinks the giant headline */
+    }
+    .hero-text p { 
+        margin: 0 auto 2rem auto; 
+    }
+
+    /* 3. Adjust General Spacing & Padding */
+    .section-container { 
+        padding: 3rem 1.5rem; /* Removes massive side gaps */
+    }
+    .section-title { 
+        font-size: 2.2rem; 
+    }
+
+    /* 4. Fix the AI Side Panel to fill the phone screen */
+    .ai-side-panel { 
+        max-width: 100vw; /* Takes up 100% of the screen width */
+        right: -100vw; /* Hides it fully off-screen when closed */
+    }
+}
+
+/* --- Protect Text from Being Copied --- */
+.no-copy {
+    -webkit-user-select: none; /* Safari/Chrome */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Standard */
+}
+
+/* --- STEM Schools Logo Grid Layout --- */
+.schools-container {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px dashed #e2e8f0;
+    text-align: center; /* Centers the title and description */
+}
+
+.schools-logo-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centers the logos in the row */
+    align-items: flex-start;
+    gap: 3rem; /* Controls the space between different schools */
+    margin-top: 2rem;
+}
+
+.school-logo-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 120px; /* Keeps the text wrapping neatly under each logo */
+    text-align: center;
+}
+
+.school-logo-item img {
+            width: 80px; 
+            height: 80px;
+            object-fit: contain; 
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+            
+            /* 👇 This turns the colored logo into a sleek grey silhouette! 👇 */
+            filter: grayscale(100%) opacity(0.6); 
+            transition: all 0.3s ease, filter 0.3s ease;
+        }
+
+        /* 👇 This brings the full color back when they hover! 👇 */
+.school-logo-item:hover img {
+            transform: scale(1.15); 
+            filter: grayscale(0%) opacity(1) drop-shadow(0px 10px 10px rgba(30, 58, 138, 0.15)); 
+        }
+
+.school-logo-item span {
+    color: var(--brand-dark);
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+/* --- Dropdown List Styles --- */
+.more-schools-list {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: var(--brand-white);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border-top: 4px solid var(--brand-teal);
+    display: none; /* Hidden by default! */
+    animation: slideDown 0.3s ease-out;
+}
+
+.school-text-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.2rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+.school-text-links a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.school-text-links a:hover { color: var(--brand-teal); }
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Continuous Logo Scrolling Marquee --- */
+.marquee-wrapper {
+    width: 100%;
+    overflow: hidden; /* Hides the logos that are off-screen */
+    position: relative;
+    padding: 1rem 0;
+    margin-top: 1rem;
+    /* Optional: Creates a cool fading effect on the left and right edges */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.marquee-track {
+    display: flex;
+    width: max-content; /* Tells the track to be as wide as all the logos combined */
+    gap: 4rem; /* Space between each logo */
+    animation: scroll-left 20s linear infinite; /* 20s is the speed. Lower = faster */
+}
+
+/* Pauses the scrolling when the mouse hovers over it! */
+.marquee-track:hover {
+    animation-play-state: paused;
+}
+
+/* The Animation Keyframes */
+@keyframes scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } /* Shifts exactly half the track width to loop perfectly */
+}
+
+/* --- Simple Text Dropdown Button --- */
+.more-schools-trigger {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+    cursor: pointer;
+}
+
+.view-all-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--brand-dark-blue); /* Matches your headings */
+    transition: all 0.2s ease;
+    padding: 0.5rem 1rem;
+}
+
+/* Changes to Orange on Hover and Click */
+.more-schools-trigger:hover .view-all-text {
+    color: var(--brand-orange);
+}
+
+.more-schools-trigger:active .view-all-text {
+    color: var(--brand-orange);
+    transform: scale(0.95); /* Tiny shrink effect so it feels like a real button press */
+}

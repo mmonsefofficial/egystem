@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Second Language | STEM Guide</title>
+    <link rel="icon" href="head.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-dark-blue: #1E3A8A; --brand-orange: #FF6B35; --brand-teal: #0891B2;
+            --brand-purple: #7E22CE; --brand-green: #10B981; --brand-yellow: #F59E0B;
+            --brand-white: #FFFFFF; --brand-off-white: #F8FAFC; --brand-dark: #1F2937;
+            --text-light: #4B5563;
+            --bg-gradient: linear-gradient(135deg, #F8FAFC 0%, #eef2ff 50%, #fff7ed 100%);
+            --ai-gradient: linear-gradient(135deg, #7E22CE, #0891B2);
+            --subject-theme: var(--brand-purple);
+            --subject-light: rgba(126, 34, 206, 0.1);
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background: var(--bg-gradient); color: var(--brand-dark); overflow-x: hidden; }
+        .navbar-container { padding: 1.5rem 4rem; display: flex; justify-content: center; position: sticky; top: 0; z-index: 100; }
+        .navbar { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(15px); border-radius: 50px; padding: 0.8rem 2rem; display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 1200px; box-shadow: 0 10px 30px rgba(30, 58, 138, 0.08); }
+        .logo { display: flex; align-items: center; }
+        .logo-img { max-height: 45px; width: auto; object-fit: contain; transition: transform 0.3s ease; }
+        .logo-img:hover { transform: scale(1.1) rotate(-3deg); }
+        .nav-links { display: flex; list-style: none; gap: 3rem; margin: 0; padding: 0; }
+        .nav-links a { text-decoration: none; color: var(--text-light); font-weight: 600; font-size: 0.95rem; transition: color 0.3s; position: relative; }
+        .nav-links a:hover { color: var(--brand-dark-blue); }
+        .back-link { display: flex; align-items: center; gap: 5px; color: var(--subject-theme) !important; }
+        
+        .ai-btn { width: 45px; height: 45px; border-radius: 50%; background: var(--ai-gradient); display: flex; justify-content: center; align-items: center; color: white; font-size: 1.3rem; cursor: pointer; box-shadow: 0 4px 15px rgba(126, 34, 206, 0.4); animation: ai-pulse 2s infinite; }
+        @keyframes ai-pulse { 0% { box-shadow: 0 0 0 0 rgba(126, 34, 206, 0.6); } 70% { box-shadow: 0 0 0 15px rgba(126, 34, 206, 0); } 100% { box-shadow: 0 0 0 0 rgba(126, 34, 206, 0); } }
+
+        .ai-side-panel { position: fixed; top: 0; right: -420px; width: 100%; max-width: 400px; height: 100vh; background: var(--brand-white); box-shadow: -10px 0 40px rgba(0,0,0,0.15); transition: right 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); z-index: 1000; display: flex; flex-direction: column; }
+        .ai-side-panel.active { right: 0; }
+        .chat-header { padding: 1.5rem; background: var(--ai-gradient); color: white; display: flex; justify-content: space-between; align-items: center; }
+        .chat-header h3 { margin: 0; font-size: 1.2rem; font-weight: 600; }
+        .close-btn { background: none; border: none; color: white; font-size: 1.8rem; cursor: pointer; transition: transform 0.3s; }
+        .close-btn:hover { transform: scale(1.2) rotate(90deg); }
+        .chat-box { flex: 1; padding: 1.5rem; overflow-y: auto; background: var(--brand-off-white); display: flex; flex-direction: column; gap: 1rem; }
+        .chat-msg { max-width: 80%; padding: 1rem; border-radius: 15px; font-size: 0.95rem; line-height: 1.5; }
+        .msg-ai { background: var(--brand-white); border: 1px solid #e5e7eb; align-self: flex-start; border-bottom-left-radius: 2px; }
+        .msg-user { background: var(--brand-teal); color: white; align-self: flex-end; border-bottom-right-radius: 2px; }
+        .chat-input { padding: 1.5rem; background: var(--brand-white); border-top: 1px solid #e5e7eb; display: flex; gap: 10px; }
+        .chat-input input { flex: 1; padding: 0.8rem 1.2rem; border: 1px solid #d1d5db; border-radius: 25px; outline: none; font-family: 'Poppins', sans-serif; }
+        .chat-input button { background: var(--brand-teal); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; }
+
+        .subject-header { max-width: 1200px; margin: 2rem auto; padding: 4rem; background: var(--brand-white); border-radius: 30px; box-shadow: 0 20px 40px rgba(30, 58, 138, 0.05); display: flex; align-items: center; justify-content: space-between; border-left: 8px solid var(--subject-theme); }
+        .subject-title h1 { font-size: 3.5rem; margin: 0 0 1rem 0; color: var(--subject-theme); letter-spacing: -1px; }
+        .subject-title p { font-size: 1.1rem; color: var(--text-light); max-width: 600px; line-height: 1.6; margin: 0; }
+        .subject-icon { font-size: 6rem; background: var(--subject-light); width: 150px; height: 150px; display: flex; justify-content: center; align-items: center; border-radius: 30px; color: var(--subject-theme); }
+
+        /* Custom Tabs UI */
+        .choice-tabs { max-width: 1200px; margin: 0 auto 3rem; display: flex; justify-content: center; gap: 1.5rem; }
+        .choice-btn { background: var(--brand-white); border: 2px solid var(--subject-theme); color: var(--subject-theme); padding: 1rem 3rem; border-radius: 30px; font-weight: 700; font-size: 1.1rem; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .choice-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(126, 34, 206, 0.2); }
+        .choice-btn.active { background: var(--subject-theme); color: var(--brand-white); }
+        
+        .choice-content { display: none; animation: fadeIn 0.5s ease-in-out; }
+        .choice-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        .curriculum-container { max-width: 1200px; margin: 0 auto 2rem; padding: 0 4rem; }
+        .semester-title { font-size: 2.2rem; color: var(--brand-dark-blue); margin-bottom: 1.5rem; border-bottom: 3px solid var(--subject-light); padding-bottom: 0.5rem; display: inline-block;}
+        .unit-card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); border-radius: 20px; padding: 2.5rem; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid rgba(255,255,255,1); }
+        .unit-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid var(--subject-light); }
+        .unit-header h2 { margin: 0; color: var(--brand-dark); font-size: 1.8rem; }
+        .unit-badge { background: var(--subject-light); color: var(--subject-theme); padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600; font-size: 0.9rem; }
+        .resource-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .resource-link { display: flex; align-items: center; gap: 1rem; padding: 1.2rem; background: var(--brand-off-white); border-radius: 12px; text-decoration: none; color: var(--brand-dark); font-weight: 500; transition: all 0.2s ease; border: 1px solid transparent; }
+        .resource-link:hover { background: var(--brand-white); border-color: var(--subject-theme); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(30, 58, 138, 0.08); }
+        .resource-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; }
+        .icon-pdf { background: #fee2e2; color: #ef4444; }
+        .icon-video { background: #e0e7ff; color: #6366f1; }
+        .icon-quiz { background: #dcfce7; color: #22c55e; }
+        .resource-text { display: flex; flex-direction: column; }
+        .resource-text span { font-size: 0.8rem; color: var(--text-light); }
+    </style>
+</head>
+<body>
+    <div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(31, 41, 55, 0.4); backdrop-filter: blur(4px); z-index: 999;" onclick="toggleChat()"></div>
+    
+    <aside class="ai-side-panel" id="aiPanel">
+        <div class="chat-header">
+            <h3>✨ Language Tutor</h3>
+            <button class="close-btn" onclick="toggleChat()">×</button>
+        </div>
+        <div class="chat-box" id="chatHistory">
+            <div class="chat-msg msg-ai">Parlez-vous français? Sprechen Sie Deutsch? Let's practice your vocabulary!</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Type a sentence to translate..." onkeypress="handleEnter(event)">
+            <button onclick="sendMessage()">➤</button>
+        </div>
+    </aside>
+
+    <div class="navbar-container">
+        <nav class="navbar">
+            <div class="logo"><a href="index.html"><img src="logo.png" alt="STEM Guide Logo" class="logo-img"></a></div>
+            <ul class="nav-links">
+                <li><a href="grade10.html" class="back-link">← Back to Hub</a></li>
+                <li><a href="#tracks">Select Track</a></li>
+            </ul>
+            <div class="ai-btn" onclick="toggleChat()">✨</div>
+        </nav>
+    </div>
+
+    <header class="subject-header">
+        <div class="subject-title">
+            <h1>Second Language</h1>
+            <p>Expand your global reach. Choose your language track below to access study guides and conversational practice.</p>
+        </div>
+        <div class="subject-icon">💬</div>
+    </header>
+
+    <div class="choice-tabs" id="tracks">
+        <button class="choice-btn active" onclick="switchLanguage('french', this)">🇫🇷 French Track</button>
+        <button class="choice-btn" onclick="switchLanguage('deutsch', this)">🇩🇪 Deutsch Track</button>
+    </div>
+
+    <div id="french" class="choice-content active">
+        <main class="curriculum-container">
+            <h2 class="semester-title">Semester 1 (French)</h2>
+            <div class="unit-card">
+                <div class="unit-header">
+                    <h2>Unit 1: Basic Conversation</h2>
+                    <span class="unit-badge">4 Weeks</span>
+                </div>
+                <div class="resource-grid">
+                    <a href="#" class="resource-link"><div class="resource-icon icon-pdf">📄</div><div class="resource-text">Core Vocabulary List<span>Printable PDF - 1 MB</span></div></a>
+                    <a href="#" class="resource-link"><div class="resource-icon icon-quiz">📝</div><div class="resource-text">Verb Conjugation (Present)<span>Interactive Flashcards</span></div></a>
+                </div>
+            </div>
+
+            <h2 class="semester-title">Semester 2 (French)</h2>
+            <div class="unit-card">
+                <div class="unit-header">
+                    <h2>Unit 2: Advanced Grammar</h2>
+                    <span class="unit-badge">4 Weeks</span>
+                </div>
+                <div class="resource-grid">
+                    <a href="#" class="resource-link"><div class="resource-icon icon-video">🎬</div><div class="resource-text">Passé Composé vs. Imparfait<span>Video Lesson - 15 mins</span></div></a>
+                    <a href="#" class="resource-link"><div class="resource-icon icon-pdf">📄</div><div class="resource-text">Sentence Structure Guide<span>Reference PDF</span></div></a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="deutsch" class="choice-content">
+        <main class="curriculum-container">
+            <h2 class="semester-title">Semester 1 (Deutsch)</h2>
+            <div class="unit-card">
+                <div class="unit-header">
+                    <h2>Unit 1: Greetings & Basics</h2>
+                    <span class="unit-badge">4 Weeks</span>
+                </div>
+                <div class="resource-grid">
+                    <a href="#" class="resource-link"><div class="resource-icon icon-pdf">📄</div><div class="resource-text">Essential Vocab & Nouns<span>Printable PDF - 1 MB</span></div></a>
+                    <a href="#" class="resource-link"><div class="resource-icon icon-quiz">📝</div><div class="resource-text">Der, Die, Das Quiz<span>Interactive Practice</span></div></a>
+                </div>
+            </div>
+
+            <h2 class="semester-title">Semester 2 (Deutsch)</h2>
+            <div class="unit-card">
+                <div class="unit-header">
+                    <h2>Unit 2: Cases & Sentence Structure</h2>
+                    <span class="unit-badge">4 Weeks</span>
+                </div>
+                <div class="resource-grid">
+                    <a href="#" class="resource-link"><div class="resource-icon icon-video">🎬</div><div class="resource-text">Accusative vs Dative Cases<span>Video Lesson - 20 mins</span></div></a>
+                    <a href="#" class="resource-link"><div class="resource-icon icon-pdf">📄</div><div class="resource-text">Prepositions Guide<span>Cheat Sheet PDF</span></div></a>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Tab Switcher Logic
+        function switchLanguage(trackId, btnElement) {
+            // Hide all contents
+            document.querySelectorAll('.choice-content').forEach(el => el.classList.remove('active'));
+            // Remove active style from all buttons
+            document.querySelectorAll('.choice-btn').forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected content and highlight button
+            document.getElementById(trackId).classList.add('active');
+            btnElement.classList.add('active');
+        }
+
+        // AI Logic
+        function toggleChat() { const panel = document.getElementById('aiPanel'); const overlay = document.getElementById('overlay'); if (panel.classList.contains('active')) { panel.classList.remove('active'); overlay.style.display = 'none'; } else { panel.classList.add('active'); overlay.style.display = 'block'; setTimeout(() => document.getElementById('userInput').focus(), 500); } }
+        function sendMessage() { const input = document.getElementById('userInput'); const chatHistory = document.getElementById('chatHistory'); const message = input.value.trim(); if (message === '') return; chatHistory.innerHTML += `<div class="chat-msg msg-user">${message}</div>`; input.value = ''; chatHistory.scrollTop = chatHistory.scrollHeight; setTimeout(() => { chatHistory.innerHTML += `<div class="chat-msg msg-ai">I will be able to translate and correct your grammar perfectly once the API is hooked up.</div>`; chatHistory.scrollTop = chatHistory.scrollHeight; }, 800); }
+        function handleEnter(event) { if (event.key === 'Enter') sendMessage(); }
+    </script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics Hub | STEM Guide</title>
+    <link rel="icon" href="head.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* 2. ONLY KEEP THE PHYSICS-SPECIFIC STYLES HERE */
+        :root {
+            --subject-theme: var(--brand-purple);
+            --subject-light: rgba(126, 34, 206, 0.1);
+        }
+        /* Hide the orange underline animation on the subject navigation */
+        .nav-links a::after { display: none !important; }
+        .back-link { display: flex; align-items: center; gap: 5px; color: var(--subject-theme) !important; }
+        .subject-header { max-width: 1200px; margin: 2rem auto; padding: 4rem; background: var(--brand-white); border-radius: 30px; box-shadow: 0 20px 40px rgba(30, 58, 138, 0.05); display: flex; align-items: center; justify-content: space-between; border-left: 8px solid var(--subject-theme); }
+        .subject-title h1 { font-size: 3.5rem; margin: 0 0 1rem 0; color: var(--subject-theme); letter-spacing: -1px; }
+        .subject-title p { font-size: 1.1rem; color: var(--text-light); max-width: 600px; line-height: 1.6; margin: 0; }
+        .subject-icon { font-size: 6rem; background: var(--subject-light); width: 150px; height: 150px; display: flex; justify-content: center; align-items: center; border-radius: 30px; color: var(--subject-theme); }
+
+        .curriculum-container { max-width: 1200px; margin: 0 auto 2rem; padding: 0 4rem; }
+        .semester-title { font-size: 2.2rem; color: var(--brand-dark-blue); margin-bottom: 1.5rem; border-bottom: 3px solid var(--subject-light); padding-bottom: 0.5rem; display: inline-block;}
+        .unit-card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); border-radius: 20px; padding: 2.5rem; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid rgba(255,255,255,1); }
+        .unit-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid var(--subject-light); }
+        .unit-header h2 { margin: 0; color: var(--brand-dark); font-size: 1.8rem; }
+        .unit-badge { background: var(--subject-light); color: var(--subject-theme); padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600; font-size: 0.9rem; }
+        .resource-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .resource-link { display: flex; align-items: center; gap: 1rem; padding: 1.2rem; background: var(--brand-off-white); border-radius: 12px; text-decoration: none; color: var(--brand-dark); font-weight: 500; transition: all 0.2s ease; border: 1px solid transparent; }
+        .resource-link:hover { background: var(--brand-white); border-color: var(--subject-theme); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(30, 58, 138, 0.08); }
+        .resource-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; }
+        .icon-pdf { background: #fee2e2; color: #ef4444; }
+        .icon-video { background: #e0e7ff; color: #6366f1; }
+        .icon-quiz { background: #dcfce7; color: #22c55e; }
+        .resource-text { display: flex; flex-direction: column; }
+        .resource-text span { font-size: 0.8rem; color: var(--text-light); }
+
+        /* Mobile adjustments for the Hub Header */
+        @media screen and (max-width: 768px) {
+            .subject-header { flex-direction: column; text-align: center; padding: 2rem 1.5rem; }
+            .subject-title h1 { font-size: 2.8rem; }
+            .subject-icon { margin-top: 1.5rem; }
+            .curriculum-container { padding: 0 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(31, 41, 55, 0.4); backdrop-filter: blur(4px); z-index: 999;" onclick="toggleChat()"></div>
+    
+    <aside class="ai-side-panel" id="aiPanel">
+        <div class="chat-header">
+            <h3>✨ Physics Tutor</h3>
+            <button class="close-btn" onclick="toggleChat()">×</button>
+        </div>
+        <div class="chat-box" id="chatHistory">
+            <div class="chat-msg msg-ai">Need to figure out specific heat capacity or wave frequencies? Send your question over!</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Ask a physics question..." onkeypress="handleEnter(event)">
+            <button onclick="sendMessage()">➤</button>
+        </div>
+    </aside>
+
+    <div class="navbar-container" id="navContainer">
+        <nav class="navbar">
+            <div class="logo"><a href="index.html"><img src="logo.png" alt="STEM Guide Logo" class="logo-img"></a></div>
+            <ul class="nav-links">
+                <li><a href="grade10.html" class="back-link">← Back to Hub</a></li>
+                <li><a href="#semester1">Semester 1</a></li>
+                <li><a href="#semester2">Semester 2</a></li>
+            </ul>
+            <div class="ai-btn" onclick="toggleChat()">✨</div>
+        </nav>
+    </div>
+
+    <header class="subject-header">
+        <div class="subject-title">
+            <h1>Physics</h1>
+            <p>Uncover the laws of the universe. Access materials covering thermodynamics, electromagnetism, and modern quantum basics.</p>
+        </div>
+        <div class="subject-icon">⚡</div>
+    </header>
+
+    <main class="curriculum-container" id="semester1">
+        <h2 class="semester-title">Semester 1</h2>
+        <div class="unit-card">
+            <div class="unit-header">
+                <h2>Unit 1: Thermodynamics</h2>
+                <span class="unit-badge">3 Weeks</span>
+            </div>
+            <div class="resource-grid">
+                <a href="#" class="resource-link"><div class="resource-icon icon-pdf">📄</div><div class="resource-text">Laws of Thermodynamics<span>Lecture Slides - 2.8 MB</span></div></a>
+                <a href="#" class="resource-link"><div class="resource-icon icon-video">🎬</div><div class="resource-text">Heat Transfer Systems<span>Video Tutorial - 15 mins</span></div></a>
+                <a href="#" class="resource-link"><div class="resource-icon icon-quiz">📝</div><div class="resource-text">Calorimetry Problems<span>Interactive Worksheet</span></div></a>
+            </div>
+        </div>
+
+        <div class="unit-card">
+            <div class="unit-header">
+                <h2>Unit 2: Optics & Waves</h2>
+                <span class="unit-badge">4 Weeks</span>
+            </div>
+            <div class="resource-grid">
+                <a href="#" class="resource-link"><div class="resource-icon icon-pdf">📄</div><div class="resource-text">Refraction & Lenses<span>Cheat Sheet - 1.2 MB</span></div></a>
+                <a href="#" class="resource-link"><div class="resource-icon icon-video">🎬</div><div class="resource-text">Wave Interference Patterns<span>Lab Simulation Video</span></div></a>
+            </div>
+        </div>
+    </main>
+
+    <main class="curriculum-container" id="semester2">
+        <h2 class="semester-title">Semester 2</h2>
+        <div class="unit-card">
+            <div class="unit-header">
+                <h2>Unit 3: Electromagnetism</h2>
+                <span class="unit-badge">5 Weeks</span>
+            </div>
+            <div class="resource-grid">
+                <a href="#" class="resource-link"><div class="resource-icon icon-pdf">📄</div><div class="resource-text">Electric Fields & Circuits<span>Study Notes - 3.4 MB</span></div></a>
+                <a href="#" class="resource-link"><div class="resource-icon icon-video">🎬</div><div class="resource-text">Magnetic Forces & Induction<span>Video Breakdown - 22 mins</span></div></a>
+                <a href="#" class="resource-link"><div class="resource-icon icon-quiz">📝</div><div class="resource-text">Circuit Analysis Drill<span>Interactive Practice</span></div></a>
+            </div>
+        </div>
+
+        <div class="unit-card">
+            <div class="unit-header">
+                <h2>Unit 4: Modern Physics</h2>
+                <span class="unit-badge">3 Weeks</span>
+            </div>
+            <div class="resource-grid">
+                <a href="#" class="resource-link"><div class="resource-icon icon-video">🎬</div><div class="resource-text">The Photoelectric Effect<span>Lecture Video - 18 mins</span></div></a>
+                <a href="#" class="resource-link"><div class="resource-icon icon-quiz">📝</div><div class="resource-text">Quantum Basics Quiz<span>Interactive Worksheet</span></div></a>
+            </div>
+        </div>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+</html>

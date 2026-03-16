@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arabic Hub | STEM Guide</title>
+    <link rel="icon" href="head.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-dark-blue: #1E3A8A; --brand-orange: #FF6B35; --brand-teal: #0891B2;
+            --brand-purple: #7E22CE; --brand-green: #10B981; --brand-yellow: #F59E0B;
+            --brand-white: #FFFFFF; --brand-off-white: #F8FAFC; --brand-dark: #1F2937;
+            --text-light: #4B5563;
+            --bg-gradient: linear-gradient(135deg, #F8FAFC 0%, #eef2ff 50%, #fff7ed 100%);
+            --ai-gradient: linear-gradient(135deg, #7E22CE, #0891B2);
+            
+            /* Subject Theme (Arabic = Green) */
+            --subject-theme: var(--brand-green);
+            --subject-light: rgba(16, 185, 129, 0.1);
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background: var(--bg-gradient); color: var(--brand-dark); overflow-x: hidden; }
+        .navbar-container { padding: 1.5rem 4rem; display: flex; justify-content: center; position: sticky; top: 0; z-index: 100; }
+        .navbar { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(15px); border-radius: 50px; padding: 0.8rem 2rem; display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 1200px; box-shadow: 0 10px 30px rgba(30, 58, 138, 0.08); }
+        .logo { display: flex; align-items: center; }
+        .logo-img { max-height: 45px; width: auto; object-fit: contain; transition: transform 0.3s ease; }
+        .logo-img:hover { transform: scale(1.1) rotate(-3deg); }
+        .nav-links { display: flex; list-style: none; gap: 3rem; margin: 0; padding: 0; }
+        .nav-links a { text-decoration: none; color: var(--text-light); font-weight: 600; font-size: 0.95rem; transition: color 0.3s; position: relative; }
+        .nav-links a:hover { color: var(--brand-dark-blue); }
+        .back-link { display: flex; align-items: center; gap: 5px; color: var(--subject-theme) !important; }
+        
+        .ai-btn { width: 45px; height: 45px; border-radius: 50%; background: var(--ai-gradient); display: flex; justify-content: center; align-items: center; color: white; font-size: 1.3rem; cursor: pointer; box-shadow: 0 4px 15px rgba(126, 34, 206, 0.4); animation: ai-pulse 2s infinite; }
+        @keyframes ai-pulse { 0% { box-shadow: 0 0 0 0 rgba(126, 34, 206, 0.6); } 70% { box-shadow: 0 0 0 15px rgba(126, 34, 206, 0); } 100% { box-shadow: 0 0 0 0 rgba(126, 34, 206, 0); } }
+
+        .ai-side-panel { position: fixed; top: 0; right: -420px; width: 100%; max-width: 400px; height: 100vh; background: var(--brand-white); box-shadow: -10px 0 40px rgba(0,0,0,0.15); transition: right 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); z-index: 1000; display: flex; flex-direction: column; }
+        .ai-side-panel.active { right: 0; }
+        .chat-header { padding: 1.5rem; background: var(--ai-gradient); color: white; display: flex; justify-content: space-between; align-items: center; }
+        .chat-header h3 { margin: 0; font-size: 1.2rem; font-weight: 600; }
+        .close-btn { background: none; border: none; color: white; font-size: 1.8rem; cursor: pointer; transition: transform 0.3s; }
+        .close-btn:hover { transform: scale(1.2) rotate(90deg); }
+        .chat-box { flex: 1; padding: 1.5rem; overflow-y: auto; background: var(--brand-off-white); display: flex; flex-direction: column; gap: 1rem; }
+        .chat-msg { max-width: 80%; padding: 1rem; border-radius: 15px; font-size: 0.95rem; line-height: 1.5; }
+        .msg-ai { background: var(--brand-white); border: 1px solid #e5e7eb; align-self: flex-start; border-bottom-left-radius: 2px; }
+        .msg-user { background: var(--brand-teal); color: white; align-self: flex-end; border-bottom-right-radius: 2px; }
+        .chat-input { padding: 1.5rem; background: var(--brand-white); border-top: 1px solid #e5e7eb; display: flex; gap: 10px; }
+        .chat-input input { flex: 1; padding: 0.8rem 1.2rem; border: 1px solid #d1d5db; border-radius: 25px; outline: none; font-family: 'Poppins', sans-serif; }
+        .chat-input button { background: var(--brand-teal); color: white; border: none; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; }
+
+        .subject-header { max-width: 1200px; margin: 2rem auto; padding: 4rem; background: var(--brand-white); border-radius: 30px; box-shadow: 0 20px 40px rgba(30, 58, 138, 0.05); display: flex; align-items: center; justify-content: space-between; border-left: 8px solid var(--subject-theme); }
+        .subject-title h1 { font-size: 3.5rem; margin: 0 0 1rem 0; color: var(--subject-theme); letter-spacing: -1px; }
+        .subject-title p { font-size: 1.1rem; color: var(--text-light); max-width: 600px; line-height: 1.6; margin: 0; }
+        .subject-icon { font-size: 6rem; background: var(--subject-light); width: 150px; height: 150px; display: flex; justify-content: center; align-items: center; border-radius: 30px; color: var(--subject-theme); }
+
+        .curriculum-container { max-width: 1200px; margin: 0 auto 5rem; padding: 0 4rem; }
+        .unit-card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(10px); border-radius: 20px; padding: 2.5rem; margin-bottom: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.03); border: 1px solid rgba(255,255,255,1); }
+        .unit-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; padding-bottom: 1rem; border-bottom: 2px solid var(--subject-light); }
+        .unit-header h2 { margin: 0; color: var(--brand-dark); font-size: 1.8rem; }
+        .unit-badge { background: var(--subject-light); color: var(--subject-theme); padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600; font-size: 0.9rem; }
+        .resource-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .resource-link { display: flex; align-items: center; gap: 1rem; padding: 1.2rem; background: var(--brand-off-white); border-radius: 12px; text-decoration: none; color: var(--brand-dark); font-weight: 500; transition: all 0.2s ease; border: 1px solid transparent; }
+        .resource-link:hover { background: var(--brand-white); border-color: var(--subject-theme); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(30, 58, 138, 0.08); }
+        .resource-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; }
+        .icon-pdf { background: #fee2e2; color: #ef4444; }
+        .icon-video { background: #e0e7ff; color: #6366f1; }
+        .icon-quiz { background: #dcfce7; color: #22c55e; }
+        .resource-text { display: flex; flex-direction: column; }
+        .resource-text span { font-size: 0.8rem; color: var(--text-light); }
+    </style>
+</head>
+<body>
+    <div id="overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(31, 41, 55, 0.4); backdrop-filter: blur(4px); z-index: 999;" onclick="toggleChat()"></div>
+    
+    <aside class="ai-side-panel" id="aiPanel">
+        <div class="chat-header">
+            <h3>✨ Arabic Tutor</h3>
+            <button class="close-btn" onclick="toggleChat()">×</button>
+        </div>
+        <div class="chat-box" id="chatHistory">
+            <div class="chat-msg msg-ai">Need help with Nahw (grammar), Balagha (rhetoric), or analyzing texts? Let me know!</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="userInput" placeholder="Ask your question..." onkeypress="handleEnter(event)">
+            <button onclick="sendMessage()">➤</button>
+        </div>
+    </aside>
+
+    <div class="navbar-container">
+        <nav class="navbar">
+            <div class="logo"><a href="index.html"><img src="logo.png" alt="STEM Guide Logo" class="logo-img"></a></div>
+            <ul class="nav-links">
+                <li><a href="grade10.html" class="back-link">← Back to Hub</a></li>
+                <li><a href="#semester1">Semester 1</a></li>
+            </ul>
+            <div class="ai-btn" onclick="toggleChat()">✨</div>
+        </nav>
+    </div>
+
+    <header class="subject-header">
+        <div class="subject-title">
+            <h1>Arabic</h1>
+            <p>Master your mother tongue. Dive deep into classical literature, complex grammar rules, and rhetoric.</p>
+        </div>
+        <div class="subject-icon">📚</div>
+    </header>
+
+    <main class="curriculum-container" id="semester1">
+        <div class="unit-card">
+            <div class="unit-header">
+                <h2>Unit 1: Grammar & Syntax (Nahw)</h2>
+                <span class="unit-badge">3 Weeks</span>
+            </div>
+            <div class="resource-grid">
+                <a href="#" class="resource-link"><div class="resource-icon icon-pdf">📄</div><div class="resource-text">Sentence Structures<span>Notes - 2.1 MB</span></div></a>
+                <a href="#" class="resource-link"><div class="resource-icon icon-quiz">📝</div><div class="resource-text">Grammar Drill<span>Interactive Exercise</span></div></a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function toggleChat() { const panel = document.getElementById('aiPanel'); const overlay = document.getElementById('overlay'); if (panel.classList.contains('active')) { panel.classList.remove('active'); overlay.style.display = 'none'; } else { panel.classList.add('active'); overlay.style.display = 'block'; setTimeout(() => document.getElementById('userInput').focus(), 500); } }
+        function sendMessage() { const input = document.getElementById('userInput'); const chatHistory = document.getElementById('chatHistory'); const message = input.value.trim(); if (message === '') return; chatHistory.innerHTML += `<div class="chat-msg msg-user">${message}</div>`; input.value = ''; chatHistory.scrollTop = chatHistory.scrollHeight; setTimeout(() => { chatHistory.innerHTML += `<div class="chat-msg msg-ai">I will be able to parse that Arabic sentence perfectly once my API is connected!</div>`; chatHistory.scrollTop = chatHistory.scrollHeight; }, 800); }
+        function handleEnter(event) { if (event.key === 'Enter') sendMessage(); }
+    </script>
+</body>
+</html>
