@@ -32,6 +32,76 @@
 </head>
 
 <body class="no-copy">
+    <div id="mobile-blocker">
+    <div class="blocker-content">
+        <div class="compass-icon">🧭</div>
+        <h1>Stemguide</h1>
+        <p>It will be available on mobile soon.</p>
+        <span>Please visit us on a desktop or laptop for the full experience.</span>
+    </div>
+</div>
+
+<style>
+    /* Default: Hide the blocker on desktops */
+    #mobile-blocker {
+        display: none;
+    }
+
+    /* Detect Mobile Devices (Width less than 768px) */
+    @media (max-width: 768px) {
+        #mobile-blocker {
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #1e3a8a; /* Your brand dark blue */
+            z-index: 10000; /* Ensure it's on top of everything */
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            padding: 20px;
+        }
+
+        /* Hide the rest of the body content on mobile */
+        body {
+            overflow: hidden;
+        }
+    }
+
+    .blocker-content h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        color: #f97316; /* Your brand orange */
+    }
+
+    .blocker-content p {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    .blocker-content span {
+        font-size: 0.9rem;
+        opacity: 0.7;
+    }
+
+    .compass-icon {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        display: inline-block;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+</style>
 
     <div class="bg-blob blob-1"></div>
     <div class="bg-blob blob-2"></div>
